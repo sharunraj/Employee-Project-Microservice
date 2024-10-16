@@ -1,4 +1,4 @@
-package com.example.authenticationservice.service;
+package com.ust.SpringSecurity.service;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;

@@ -1,4 +1,4 @@
-package com.example.authenticationservice.entity;
+package com.ust.SpringSecurity.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 
 @Entity
-public class UserCredentialsEntity {
+public class UserCredentialEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

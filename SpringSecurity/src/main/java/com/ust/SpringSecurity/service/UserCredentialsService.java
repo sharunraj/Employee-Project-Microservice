@@ -1,7 +1,7 @@
-package com.example.authenticationservice.service;
+package com.ust.SpringSecurity.service;
 
-import com.example.authenticationservice.dao.UserCredentialsDao;
-import com.example.authenticationservice.entity.UserCredentialsEntity;
+import com.ust.SpringSecurity.dao.UserCredentialsDao;
+import com.ust.SpringSecurity.entity.UserCredentialEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -9,21 +9,25 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserCredentialsService {
     @Autowired
-    JwtService jwtService;
-    @Autowired
-    UserCredentialsDao authDao;
+    private UserCredentialsDao userCredentialsDao;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
-    public UserCredentialsEntity register(UserCredentialsEntity user) {
+
+    @Autowired
+    private JwtService jwtService;
+
+    public UserCredentialEntity register(UserCredentialEntity user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return authDao.saveAndFlush(user);
+        return userCredentialsDao.saveAndFlush(user);
     }
-    public String generateToken(String name) {
+
+    public String generateToken(String name){
         return jwtService.generateToken(name);
     }
-    public boolean verifyToken(String token) {
+
+    public boolean verifyToken(String token){
         jwtService.validateToken(token);
         return true;
     }
-
 }

@@ -1,7 +1,7 @@
-package com.example.authenticationservice.service;
+package com.ust.SpringSecurity.service;
 
-import com.example.authenticationservice.dao.UserCredentialsDao;
-import com.example.authenticationservice.entity.UserCredentialsEntity;
+import com.ust.SpringSecurity.dao.UserCredentialsDao;
+import com.ust.SpringSecurity.entity.UserCredentialEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,13 +12,13 @@ import java.util.Optional;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
+
     @Autowired
-    UserCredentialsDao userCredentialsDao;
+    private UserCredentialsDao userCredentialsDao;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<UserCredentialsEntity> user = userCredentialsDao.findByName(username);
-        System.out.println("user 2: " + user);
-        return user.map(CustomUserDetails::new).orElseThrow(()->new UsernameNotFoundException("Username/password not valid!"));
+        Optional<UserCredentialEntity> user=userCredentialsDao.findByName(username);
+        return user.map(CustomUserDetails::new).orElseThrow(()->new UsernameNotFoundException("Username/Password not valid"));
     }
-
 }
